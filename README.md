@@ -14,49 +14,50 @@ It uses custom utility functions instead of the standard C library.
 
 ## Functions
 
+## Functions
 ### Internal functions
 | Function | Description |
 |----------|-------------|
-| `join_buffer` | Joins the newly read chunk onto the accumulated buffer and frees the old one |
-| `read_buffer` | Reads from the fd in chunks of _BUFFER_SIZE_, accumulating data until EOF |
-| `get_line` | Extracts the current line from the buffer up to and including \n |
-| `separate` | Trims the returned line from the buffer, keeping the remainder for next call |
+| `ft_putchar` | Writes a single character to stdout |
+| `ft_putstr` | Writes a string to stdout |
+| `ft_putpointer` | Writes a pointer address in hexadecimal format with `0x` prefix |
+| `ft_putnbr` | Writes a signed integer |
+| `ft_putfloat` | Writes a floating point number |
+| `ft_putunbr` | Writes an unsigned integer |
+| `ft_putnbr_hmin` | Writes an unsigned integer in lowercase hexadecimal |
+| `ft_putnbr_hmax` | Writes an unsigned integer in uppercase hexadecimal |
+| `ft_conversions` | Matches the format specifier and calls the corresponding handler |
 
 ### Main function
-| `get_next_line` | Returns the next line from a file descriptor |
+| `ft_printf` | Parses the format string and returns the total number of characters written |
 
 
 ## Usage
 
 ```bash
-git clone https://github.com/sarabezz/get_next_line.git
+git clone https://github.com/sarabezz/ft_printf.git
 cd get_next_line
 ```
 
 Include the header in your file:
 
 ```c
-#include "get_next_line.h"
+#include "ft_printf.h"
 ```
 
 Compile it with your project:
 
 ```bash
-gcc -Wall -Wextra -Werror get_next_line.c get_next_line_utils.c your_file.c -o your_program
-```
-
-To use a custom `BUFFER_SIZE`:
-
-```bash
-gcc -Wall -Wextra -Werror get_next_line.c get_next_line_utils.c your_file.c -D BUFFER_SIZE=64 -o your_program
+gcc -Wall -Wextra -Werror ft_printf.c __my_srcs/*.c your_file.c -o your_program
 ```
 
 
-## Key concepts:
-- `read()`has no concept of iles -- it only read raw bytes
-- Buffered reading with configurable chunk size via BUFFER_SIZE
-- Careful memory management with `malloc` and `free` to avoid leaks
-- Acummulating data between calls using static buffer
+## Key concepts
+
+- `va_list` and variadic functions — ft_printf accepts any number of arguments using `...`
+- Format string parsing — iterates character by character, detecting `%` to identify conversions
+- Conversion dispatching — each specifier (`%s`, `%d`, `%x`...) maps to a dedicated handler
+- Custom output functions — all writing is done without the standard C library
 
 
 ## Project info 
