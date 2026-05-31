@@ -13,8 +13,6 @@ It uses custom utility functions instead of the standard C library.
 
 
 ## Functions
-
-## Functions
 ### Internal functions
 | Function | Description |
 |----------|-------------|
